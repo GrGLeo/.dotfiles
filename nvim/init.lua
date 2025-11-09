@@ -1,17 +1,14 @@
-  local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
-end
-vim.opt.rtp:prepend(lazypath)
+require("config.lazy")
+require("comment")
 
-require("vim-options")
-require("lazy").setup("plugins")
+vim.opt.shiftwidth = 2
+vim.opt.number = true
+vim.opt.relativenumber = true
 
+vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>")
+vim.keymap.set("n", "<space>x", ":.lua<CR>")
+vim.keymap.set("v", "<space>x", ":.lua<CR>")
+vim.keymap.set("n", "<space>pv", ":Ex<CR>")
 
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
